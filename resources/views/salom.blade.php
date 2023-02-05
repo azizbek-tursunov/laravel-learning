@@ -7,7 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> Assalomu alykum {{ $ism }}</h1>
-    {{ $id }}
+    <h1> Nima gap </h1>
 </body>
 </html>

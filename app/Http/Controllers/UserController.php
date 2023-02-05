@@ -8,19 +8,10 @@ class UserController extends Controller
 {
     public function index() 
     {
-        return view('home');
+        return view('home'); 
     }
 
-    public function show() 
-    {
-        return ['ism' => 'Zilol',];
-    }
-
-    public function userid($id = null, $ism = null) 
-    {
-        return view('users', [
-            'id' => $id,
-            'ism' => $ism
-        ]);
+    public function store() {
+        return view('salom');
     }
 }
