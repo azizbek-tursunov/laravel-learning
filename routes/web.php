@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UserController::class, 'index']);
-Route::get('/welcome', function() {
-    return view('welcome', [
-        'name' => "<script>alert('salom')</script>",
-        'records' => [1, 2, 3, 4, 5,]
-    ]);
-});
-
-Route::view('/about', 'About');
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/service', [PageController::class, 'service'])->name('service');
