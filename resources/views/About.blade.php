@@ -1,11 +1,8 @@
-@extends('layouts.main')
-
-@section('title')
-    About
-@endsection
-
-@section('content')
-    <div>
-        Assalomu alaykum
-    </div>
-@endsection
+<x-layouts.main>
+    <x-slot:title>
+        About
+        </x-slot>
+        <div>
+            Assalomu alaykum
+        </div>
+</x-layouts.main>

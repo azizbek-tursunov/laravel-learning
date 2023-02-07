@@ -1,6 +1,4 @@
-@extends('layouts.main')
-
-@section('content')
+<x-layouts.main>
     <div
         class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         @if (Route::has('login'))
@@ -26,4 +24,5 @@
             @endforeach
         </div>
     </div>
-@endsection
+
+</x-layouts.main>
