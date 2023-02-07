@@ -8,10 +8,6 @@ class UserController extends Controller
 {
     public function index() 
     {
-        return view('home'); 
-    }
-
-    public function store() {
-        return view('salom');
+        return view('home');
     }
 }
