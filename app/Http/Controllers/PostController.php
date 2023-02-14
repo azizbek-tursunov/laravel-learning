@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -11,24 +12,10 @@ class PostController extends Controller
     public function index()
     {
 
-        // $newPost = new Post;
-        // $newPost->title = 'Yangi sarlavha';
-        // $newPost->short_content = 'yangi kichkina nimadir';
-        // $newPost->content = 'Bu katta kontent';
-        // $newPost->photo = 'Karochi botto rasm';
-        // $newPost->save();
-        // return "ishlar cho'tki bratan";
+        $post = Post::latest()->get();
+       
 
-        // $newPost = Post::create([
-        //     'title' => 'Bu array sarlavha',
-        //     'short_content' => 'hullas shuniki',
-        //     'content' => 'katta bro keldilaru',
-        //     'photo' => 'guzalsiz, guzal'
-        // ]);
-
-        $post = Post::find(6)->update(['title' => 'Biza oltinchimiza']);
-        return "Ishlar chotki bratan";
-        // return view('posts.index');
+        return view('posts.index', ['post' => $post]);
     }
 
     /**
@@ -38,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -47,40 +34,39 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        if($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('post-photos');
+        }
+
+
+        $post = Post::create([
+            'title' => $request->title,
+            'short_content' => $request->short_content,
+            'content' => $request->content,
+            'photo' => $path ?? null
+        ]);
+
+        return redirect()->route('posts.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+   
+    public function show(Post $post)
     {
-        //
+        return view('posts.show')->with([
+            'post' => $post,
+            'recent_posts' => Post::latest()->get()->except($post->id)->take(5)
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+  
+    public function edit(Post $post)
     {
-        //
+        return view('posts.edit')->with('post', $post);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(Request $request, $id)
     {
         //
