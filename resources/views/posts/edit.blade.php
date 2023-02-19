@@ -14,11 +14,11 @@
     <div class="col-lg-7 mb-5 mb-lg-0">
         <div class="contact-form">
             <div id="success"></div>
-            <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="control-group mb-4">
-                    <input type="text" class="form-control p-4" name="title" placeholder="Sarlavha" value="{{ old('title') }}"/>
+                    <input type="text" class="form-control p-4" name="title" placeholder="Sarlavha" value="{{ $post->title }}" />
                     @error('title')
                         <p class="help-block text-danger">{{ $message }}</p>
                     @enderror
@@ -31,13 +31,13 @@
                     @enderror
                 </div>
                 <div class="control-group mb-4">
-                    <input type="text" class="form-control p-4" name="short_content" placeholder="Qisqacha mazmun" value="{{ old('short_content') }}"/>
+                    <input type="text" class="form-control p-4" name="short_content" placeholder="Qisqacha mazmun" value="{{ $post->short_content }}"/>
                     @error('short_content')
                         <p class="help-block text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="control-group mb-4">
-                    <textarea class="form-control p-4" rows="6" name="content" placeholder="Maqola">{{ old('content') }}</textarea>
+                    <textarea class="form-control p-4" rows="6" name="content" placeholder="Maqola">{{ $post->title }}</textarea>
                     @error('content')
                         <p class="help-block text-danger">{{ $message }}</p>
                     @enderror

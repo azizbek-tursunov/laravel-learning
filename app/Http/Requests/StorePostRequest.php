@@ -10,7 +10,7 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title.required' => 'Sarlavha majburiy',
-            'short_content.required' => 'Qizqacha bandi majburiy',
+            'short_content.required' => 'Qisqacha bandi majburiy',
             'content.required' => 'Maqola majburiy',
             'photo.image' => 'Rasm yuklang'
         ];
@@ -36,7 +36,7 @@ class StorePostRequest extends FormRequest
             'title' => 'required|max:255',
             'short_content' => 'required',
             'content' => 'required',
-            'photo' => 'nullable|image|max:2*1024'
+            'photo' => 'nullable|image|max:2048'
         ];
     }
 }
