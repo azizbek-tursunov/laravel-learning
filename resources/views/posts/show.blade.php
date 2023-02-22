@@ -27,7 +27,7 @@
                             <span class="text-primary px-2">|</span>
                             <a class="text-secondary text-uppercase font-weight-medium" href="">Cleaning</a>
                             <span class="text-primary px-2">|</span>
-                            <a class="text-secondary text-uppercase font-weight-medium">{{ $post->created_at }}</a>
+                            <a class="text-secondary text-uppercase font-weight-medium">{{ $post->created_at->format('H:i d.M.Y') }}</a>
                         </div>
                         <h1 class="section-title mb-3">{{ $post->title }}</h1>
                     </div>
