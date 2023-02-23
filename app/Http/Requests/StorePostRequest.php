@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StorePostRequest extends FormRequest
 {
-    public function messages()
+    public function messages(): array
     {
         return [
             'title.required' => 'Sarlavha majburiy',
@@ -30,7 +30,7 @@ class StorePostRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'title' => 'required|max:255',

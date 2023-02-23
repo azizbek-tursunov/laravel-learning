@@ -22,7 +22,7 @@
                     @error('title')
                         <p class="help-block text-danger">{{ $message }}</p>
                     @enderror
-                    
+
                 </div>
                 <div class="control-group mb-4">
                     <input name="photo" type="file" class="form-control p-4" name="title" placeholder="Rasm" />
@@ -44,7 +44,11 @@
                 </div>
                 <div>
                     <button class="btn btn-primary btn-block py-3 px-5" type="submit"
-                        id="sendMessageButton">Saqlash</button>
+                        id="sendMessageButton">Saqlash
+                    </button>
+                    <a href="{{ route('posts.show', ['post' => $post->id ]) }}" class="btn btn-danger btn-block py-3 px-5" type="submit"
+                        id="sendMessageButton">Bekor qilish
+                    </a>
                 </div>
             </form>
         </div>

@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <x-navigation>
-        
+
 
         <x-slot:pageTitle>
             Postni o'qish
@@ -19,7 +19,14 @@
                 <div class="col-lg-8">
                     <div class="text-right">
                         <a class="btn btn-sm btn-outline-secondary" href="{{ route('posts.edit', ['post' => $post->id]) }}"> O'zgartirish </a>
-                        <a class="btn btn-sm btn-outline-danger" href=""> O'chirish </a>
+                        <form action="{{ route('posts.destroy', ['post' => $post->id]) }}"
+                              method="POST"
+                              onsubmit="return confirm('Rostdan ham o`chirishni hohlaysizmi?');"
+                            >
+                            @csrf
+                            @method('DELETE')
+                        <button class="btn btn-sm btn-outline-danger"> O'chirish </button>
+                        </form>
                     </div>
                     <div class="mb-5">
                         <div class="d-flex mb-2">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as ResponseAlias;
 use Illuminate\Support\Facades\Storage;
@@ -20,24 +21,15 @@ class PostController extends Controller
         return view('posts.index', ['post' => $post]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return ResponseAlias
-     */
+
     public function create()
     {
         return view('posts.create');
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return ResponseAlias
-     */
-    public function store(StorePostRequest $request): ResponseAlias
+
+    public function store(StorePostRequest $request)
     {
         if($request->hasFile('photo')) {
             $path = $request->file('photo')->store('post-photos');
@@ -86,20 +78,18 @@ class PostController extends Controller
             'title' => $request->title,
             'short_content' => $request->short_content,
             'content' => $request->content,
-            'photo' => $path ?? null
+            'photo' => $path ?? $post->photo
         ]);
 
         return redirect( route('posts.show', ['post' => $post->id]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return ResponseAlias
-     */
-    public function destroy($id)
+
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('posts.index');
+
     }
 }
