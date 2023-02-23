@@ -15,10 +15,10 @@ class PostController extends Controller
     public function index()
     {
 
-        $post = Post::latest()->get();
+        $posts = Post::paginate(6);
 
 
-        return view('posts.index', ['post' => $post]);
+        return view('posts.index', ['posts' => $posts ]);
     }
 
 
@@ -28,10 +28,9 @@ class PostController extends Controller
     }
 
 
-
     public function store(StorePostRequest $request)
     {
-        if($request->hasFile('photo')) {
+        if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('post-photos');
         }
 
@@ -65,9 +64,9 @@ class PostController extends Controller
     public function update(StorePostRequest $request, Post $post)
     {
 
-        if($request->hasFile('photo')) {
+        if ($request->hasFile('photo')) {
 
-            if(isset($post->photo)) {
+            if (isset($post->photo)) {
                 Storage::delete($post->photo);
             }
 
@@ -81,7 +80,7 @@ class PostController extends Controller
             'photo' => $path ?? $post->photo
         ]);
 
-        return redirect( route('posts.show', ['post' => $post->id]));
+        return redirect(route('posts.show', ['post' => $post->id]));
     }
 
 
