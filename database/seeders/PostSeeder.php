@@ -15,11 +15,6 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        Post::create([
-            'user_id' => 1,
-            'title' => 'Sarlavha',
-            'short_content' => 'Kichkina qism',
-            'content' => 'Katta qism'
-        ]);
+       Post::factory()->count(100)->create();
     }
 }
