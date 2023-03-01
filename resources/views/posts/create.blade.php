@@ -21,7 +21,13 @@
                     @error('title')
                         <p class="help-block text-danger">{{ $message }}</p>
                     @enderror
-                    
+                </div>
+                 <div class="control-group mb-4">
+                    <select name="category_id">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="control-group mb-4">
                     <input name="photo" type="file" class="form-control p-4" name="title" placeholder="Rasm" />
