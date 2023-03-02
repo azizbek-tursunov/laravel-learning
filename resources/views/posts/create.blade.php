@@ -30,6 +30,14 @@
                     </select>
                 </div>
                 <div class="control-group mb-4">
+                    <select name="tags[]" multiple>
+                        @foreach($tags as $tag)
+                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="control-group mb-4">
                     <input name="photo" type="file" class="form-control p-4" name="title" placeholder="Rasm" />
                     @error('photo')
                         <p class="help-block text-danger">{{ $message }}</p>

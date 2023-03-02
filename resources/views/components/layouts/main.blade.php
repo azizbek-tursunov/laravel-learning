@@ -86,7 +86,16 @@
                             <a href="{{ route('contact') }}" class="nav-item nav-link">Aloqa</a>
                            
                         </div>
+                        @auth
+                        {{ auth()->user()->name }}
                         <a href="{{ route('posts.create') }}" class="btn btn-primary mr-3 d-none d-lg-block">Post yaratish</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-dark mr-3 d-none d-lg-block"> Chiqish </button>
+                        </form>
+                        @else
+                        <a href="{{ route('login') }}" class="btn btn-primary mr-3 d-none d-lg-block">Kirish</a>
+                        @endauth
                     </div>
                 </nav>
             </div>

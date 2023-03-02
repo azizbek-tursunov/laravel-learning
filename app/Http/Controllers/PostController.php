@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Models\Post;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
 
     public function index()
     {
@@ -25,25 +30,36 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create')->with(['categories' => Category::all()]);
+        return view('posts.create')->with([
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
+        ]);
     }
 
 
     public function store(StorePostRequest $request)
     {
+
+        
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('post-photos');
         }
 
 
         $post = Post::create([
-            'user_id' => 1,
+            'user_id' => auth()->id(),
             'category_id' => $request->category_id,
             'title' => $request->title,
             'short_content' => $request->short_content,
             'content' => $request->content,
             'photo' => $path ?? null
         ]);
+
+        if(isset($request->tags)){
+            foreach ($request->tags as $tag) {
+                $post->tags()->attach($tag);
+            }
+        }
 
         return redirect()->route('posts.index');
     }

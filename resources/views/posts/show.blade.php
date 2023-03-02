@@ -17,8 +17,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    @auth
                     <div class="text-right">
-                        <a class="btn btn-sm btn-outline-secondary" href="{{ route('posts.edit', ['post' => $post->id]) }}"> O'zgartirish </a>
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ route('posts.edit', ['post' => $post->id]) }} "> O'zgartirish </a>
                         <form action="{{ route('posts.destroy', ['post' => $post->id]) }}"
                               method="POST"
                               onsubmit="return confirm('Rostdan ham o`chirishni hohlaysizmi?');"
@@ -28,12 +29,13 @@
                         <button class="btn btn-sm btn-outline-danger"> O'chirish </button>
                         </form>
                     </div>
+                    @endauth 
                     <div class="mb-5">
                         <div class="d-flex mb-2">
-                            <a class="text-secondary text-uppercase font-weight-medium" href="">Admin</a>
+                            @foreach ($post->tags as $tag)
+                            <a class="text-secondary text-uppercase font-weight-medium">{{ $tag->name }}</a>
                             <span class="text-primary px-2">|</span>
-                            <a class="text-secondary text-uppercase font-weight-medium" href="">Cleaning</a>
-                            <span class="text-primary px-2">|</span>
+                            @endforeach
                             <a class="text-secondary text-uppercase font-weight-medium">{{ $post->created_at->format('H:i d.M.Y') }}</a>
                         </div>
                             <a class="bg-secondary font-weight-medium px-2 py-1 rounded text-white">{{ $post->category->name }}</a>
@@ -97,7 +99,7 @@
                 <div class="col-lg-4 mt-5 mt-lg-0">
                     <div class="d-flex flex-column text-center bg-secondary rounded mb-5 py-5 px-4">
                         <img src="/img/user.jpg" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
-                        <h3 class="text-white mb-3">John Doe</h3>
+                        <h3 class="text-white mb-3">{{ $post->user->name }}</h3>
                         <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem ipsum,
                             ipsum
                             ipsum sit no ut est. Guber ea ipsum erat kasd amet est elitr ea sit.</p>
