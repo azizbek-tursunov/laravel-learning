@@ -17,6 +17,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(Post::class, 'post');
     }
 
     public function index()
@@ -78,16 +79,12 @@ class PostController extends Controller
     public function edit(Post $post)
     {
 
-        Gate::authorize('update-post', $post);
-
         return view('posts.edit')->with('post', $post);
     }
 
 
     public function update(StorePostRequest $request, Post $post)
     {
-
-        Gate::authorize('update-post', $post);
 
 
         if ($request->hasFile('photo')) {
@@ -112,10 +109,6 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        if (! Gate::allows('delete-post', $post)) {
-            abort(403);
-        }
-
         $post->delete();
 
         return redirect()->route('posts.index');

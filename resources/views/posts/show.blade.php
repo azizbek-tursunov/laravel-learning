@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     @auth
-                        @canany(['update-post', 'delete-post'], $post)
+                        @canany(['update', 'delete'], $post)
 
                         <div class="text-right">
                             <a class="btn btn-sm btn-outline-secondary"
