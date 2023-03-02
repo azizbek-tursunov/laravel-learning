@@ -9,6 +9,7 @@ use App\Models\Post;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as ResponseAlias;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -76,12 +77,18 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+
+        Gate::authorize('update-post', $post);
+
         return view('posts.edit')->with('post', $post);
     }
 
 
     public function update(StorePostRequest $request, Post $post)
     {
+
+        Gate::authorize('update-post', $post);
+
 
         if ($request->hasFile('photo')) {
 
@@ -105,6 +112,10 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        if (! Gate::allows('delete-post', $post)) {
+            abort(403);
+        }
+
         $post->delete();
 
         return redirect()->route('posts.index');
