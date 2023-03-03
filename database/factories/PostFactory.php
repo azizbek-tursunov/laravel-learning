@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'category_id' => rand(1, 5),
             'title' => fake()->sentence(),
             'short_content' => fake()->sentence(15),
-            'content' => fake()->paragraph(25)
+            'content' => fake()->paragraph(25),
         ];
     }
 }

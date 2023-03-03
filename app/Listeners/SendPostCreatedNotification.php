@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\PostCreated;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 
 class SendPostCreatedNotification
@@ -22,11 +20,10 @@ class SendPostCreatedNotification
     /**
      * Handle the event.
      *
-     * @param  \App\Events\PostCreated  $event
      * @return void
      */
     public function handle(PostCreated $event)
     {
-        Log::alert('Yangi post yaratildi: ' . $event->post->title);
+        Log::alert('Yangi post yaratildi: '.$event->post->title);
     }
 }

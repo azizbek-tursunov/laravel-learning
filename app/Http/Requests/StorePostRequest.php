@@ -12,9 +12,10 @@ class StorePostRequest extends FormRequest
             'title.required' => 'Sarlavha majburiy',
             'short_content.required' => 'Qisqacha bandi majburiy',
             'content.required' => 'Maqola majburiy',
-            'photo.image' => 'Rasm yuklang'
+            'photo.image' => 'Rasm yuklang',
         ];
     }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -36,7 +37,7 @@ class StorePostRequest extends FormRequest
             'title' => 'required|max:255',
             'short_content' => 'required',
             'content' => 'required',
-            'photo' => 'nullable|image|max:2048'
+            'photo' => 'nullable|image|max:2048',
         ];
     }
 }

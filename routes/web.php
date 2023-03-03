@@ -1,11 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,5 +32,5 @@ Route::post('register', [AuthController::class, 'register_store'])->name('regist
 Route::resources([
     'posts' => PostController::class,
     'comments' => CommentController::class,
-    'users' => UserController::class
+    'users' => UserController::class,
 ]);

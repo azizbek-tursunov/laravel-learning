@@ -57,7 +57,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email:rfc,dnc|unique:users,email',
             'password' => 'required|min:8',
-            'password_confirmation' => 'required|same:password'
+            'password_confirmation' => 'required|same:password',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -67,6 +67,5 @@ class AuthController extends Controller
         auth()->login($user);
 
         return redirect('/')->with('success', 'Akkaunt yaratildi');
-
     }
 }
